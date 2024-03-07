@@ -50,6 +50,7 @@ function List() {
 
   return (
     <Styled.Container>
+      <Styled.Title>VestePet</Styled.Title>
       <Styled.BoxFilters>
         <FilterColor onSelectColor={handleColorSelect} />
         <FilterBreed onSelectBreed={handleBreedSelect} />
@@ -59,11 +60,11 @@ function List() {
         {filteredPets.map((item, index) => (
           <Styled.Card key={index}>
             <Styled.CardImg src={item.img} />
-            <Styled.Title>Raça: {item.name}</Styled.Title>
-            <Styled.Title>Nome: {item.apelido}</Styled.Title>
-            <Styled.Title>Idade: {item.idade} {item.idade > 1 ? 'anos' : 'ano'}</Styled.Title>
-            <Styled.Title>Tamanho: {item.tamanho} cm</Styled.Title>
-            <Styled.Title>Cor: {item.cor}</Styled.Title>
+            <Styled.Text>Raça: {item.name}</Styled.Text>
+            <Styled.Text>Nome: {item.apelido}</Styled.Text>
+            <Styled.Text>Idade: {item.idade} {item.idade > 1 ? 'anos' : 'ano'}</Styled.Text>
+            <Styled.Text>Tamanho: {item.tamanho} cm</Styled.Text>
+            <Styled.Text>Cor: {item.cor}</Styled.Text>
           </Styled.Card>
         ))}
       </Styled.BoxList>

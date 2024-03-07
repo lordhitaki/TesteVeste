@@ -7,7 +7,11 @@ export const Container = styled.section`
   justify-content: center;
 `;
 
-export const Title = styled.h3`
+export const Title = styled.h1`
+  text-align: center;
+  font-size: 36px;
+`;
+export const Text = styled.h3`
   margin: 0px;
   text-align: center;
 `;
@@ -46,4 +50,6 @@ export const BoxFilters= styled.div`
 display: flex;
   gap: 20px;
   margin-top: 20px;
+  justify-content: space-around;
+  width:90%
 `

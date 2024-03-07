@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as Styled from './styles';
 
-function FilterColor() {
+function FilterColor({ onSelectColor }) {
   const [saved, setSaved] = useState([]);
 
   useEffect(() => {
@@ -12,31 +12,35 @@ function FilterColor() {
   }, []);
 
   const normalizeColor = (color) => {
-    return color.toLowerCase().trim(); 
+    return color.toLowerCase().trim();
   };
 
-  const uniqueColors = new Set();
   const colorCounts = {};
 
   saved.forEach(item => {
-    const colors = item.cor.split('/'); 
+    const colors = item.cor.split('/');
     colors.forEach(color => {
       const normalizedColor = normalizeColor(color);
-      if (!uniqueColors.has(normalizedColor)) {
-        uniqueColors.add(normalizedColor);
+      if (!colorCounts[normalizedColor]) {
         colorCounts[normalizedColor] = 1;
-        console.log(colorCounts);
       } else {
         colorCounts[normalizedColor]++;
       }
     });
   });
 
-  const filteredColors = [...uniqueColors].filter(color => colorCounts[color] >= 1);
+  const filteredColors = Object.keys(colorCounts)
+  .sort((a, b) => a.localeCompare(b))
+  .filter(color => colorCounts[color] >= 1);
+
+  const handleColorSelect = (event) => {
+    const selectedColor = event.target.value;
+    onSelectColor(selectedColor);
+  };
 
   return (
     <Styled.Box>
-      <select id="breeds" name="breeds">
+      <select id="breeds" name="breeds" onChange={handleColorSelect}>
         <option value={''}>Selecione a cor</option>
         {filteredColors.map((color, index) => (
           <option key={index} value={color}>
@@ -49,5 +53,3 @@ function FilterColor() {
 }
 
 export default FilterColor;
-
-

@@ -12,9 +12,9 @@ function Home() {
     cor:'',
     tamanho:'',
     idade:'',
-    apelido:''
+    apelido:'',
+    img:img
   })
-
   const handleBreedSelect = (breed, img) => {
     setSelectedBreed(breed);
     setImg(img);
@@ -37,7 +37,7 @@ function Home() {
     if (existingData) {
       savedBreeds = JSON.parse(existingData);
     }
-  
+    
     const newBreedData = {
       name: selectedBreed,
       cor: inputValue.cor,
@@ -50,7 +50,7 @@ function Home() {
     savedBreeds.push(newBreedData);
   
     localStorage.setItem("SavedBreed", JSON.stringify(savedBreeds));
-    alert('foi')
+    console.log(newBreedData)
     window.location.reload();
   };
   
@@ -60,7 +60,7 @@ function Home() {
       [key]: value
     });
   };
-  
+
   return (
   <Styled.Container>
     

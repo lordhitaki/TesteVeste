@@ -26,10 +26,6 @@ function FSelect({onBreedSelect }) {
     const selectedBreed = event.target.value;
     setBreed(selectedBreed);
     await getImg(selectedBreed);
-    if (img) {
-      console.log(img);
-      onBreedSelect(selectedBreed, img);
-    }
   };
   
   const getImg = async (selectedBreed) => {
@@ -37,6 +33,9 @@ function FSelect({onBreedSelect }) {
       if (selectedBreed) { 
         const fetchedData = await fetchImage(selectedBreed);
         setImg(fetchedData);
+        if (fetchedData && fetchedData.message) {
+          onBreedSelect(selectedBreed, fetchedData.message);
+        }
       }
     } catch (error) {
       console.error('Error fetching image:', error);
@@ -45,7 +44,7 @@ function FSelect({onBreedSelect }) {
 
   return (
     <Styled.Box>
-      {img?.message ? ( <Styled.Img src={img?.message}/>):(  <Styled.Img src={''}/>)}
+      {img?.message ? ( <Styled.Img src={img?.message}/>):(  <Styled.Img src={'https://images.vexels.com/media/users/3/326719/isolated/preview/252ca06ceef8087626de5d2e189a2aeb-cachorro-de-desenho-animado-sentado.png'}/>)}
      
       <Styled.Label >Escolha uma raça:</Styled.Label>
       <select id="breeds" name="breeds" onChange={selectBreed} value={breed}>

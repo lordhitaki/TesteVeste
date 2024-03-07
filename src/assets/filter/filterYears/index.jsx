@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as Styled from './styles';
 
-function FilterYears() {
+function FilterYears({ onSelectAge }) {
   const [saved, setSaved] = useState([]);
 
   useEffect(() => {
@@ -11,35 +11,40 @@ function FilterYears() {
     }
   }, []);
 
-  const normalizeidade = (idade) => {
-    return idade.toLowerCase().trim(); 
+  const normalizeAge = (age) => {
+    return age.toLowerCase().trim(); 
   };
 
-  const uniqueidades = new Set();
-  const idadeCounts = {};
+  const uniqueAges = new Set();
+  const ageCounts = {};
 
   saved.forEach(item => {
-    const idades = item.idade.split('/'); 
-    idades.forEach(idade => {
-      const normalizedidade = normalizeidade(idade);
-      if (!uniqueidades.has(normalizedidade)) {
-        uniqueidades.add(normalizedidade);
-        idadeCounts[normalizedidade] = 1;
+    const ages = item.idade.split('/'); 
+    ages.forEach(age => {
+      const normalizedAge = normalizeAge(age);
+      if (!uniqueAges.has(normalizedAge)) {
+        uniqueAges.add(normalizedAge);
+        ageCounts[normalizedAge] = 1;
       } else {
-        idadeCounts[normalizedidade]++;
+        ageCounts[normalizedAge]++;
       }
     });
   });
 
-  const filteredidades = [...uniqueidades].filter(idade => idadeCounts[idade] >= 1);
+  const filteredAges = [...uniqueAges].sort((a, b) => a - b).filter(age => ageCounts[age] >= 1);
+  
+  const handleAgeSelect = (event) => {
+    const selectedAge = event.target.value;
+    onSelectAge(selectedAge);
+  };
 
   return (
     <Styled.Box>
-      <select id="breeds" idade="breeds">
+      <select id="ages" name="ages" onChange={handleAgeSelect}>
         <option value={''}>Selecione a Idade</option>
-        {filteredidades.map((idade, index) => (
-          <option key={index} value={idade}>
-            {idade}
+        {filteredAges.map((age, index) => (
+          <option key={index} value={age}>
+            {age}
           </option>
         ))}
       </select>

@@ -63,7 +63,7 @@ function Home() {
 
   return (
   <Styled.Container>
-    
+    <Styled.Title>VestePet</Styled.Title>
       <Styled.Body>
         <FSelect onBreedSelect={handleBreedSelect} />
         <Styled.Title>Veja lista de pets disponiveis <Link to="/list">Clique aqui</Link></Styled.Title>

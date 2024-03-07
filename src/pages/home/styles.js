@@ -17,6 +17,8 @@ align-items:center;
 justify-contente: center;
 position:absolute;
 top:120px;
+border: 12px solid black;
+border-radius: 7px;
 `
 
 export const BoxForm = styled.div`

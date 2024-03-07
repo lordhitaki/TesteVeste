@@ -22,6 +22,8 @@ export const BoxList = styled.div`
   padding: 20px; 
   margin-top: 30px;
   margin-bottom:30px;
+  border: 8px solid black;
+  border-radius: 7px;
 `;
 
 export const Card = styled.div`
